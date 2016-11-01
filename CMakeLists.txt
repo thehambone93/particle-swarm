@@ -20,7 +20,7 @@ set(SOURCES
     src/main.cpp
 )
 
-add_executable(particle ${SOURCES})
+add_executable(swarm ${SOURCES})
 
 include_directories(${SDL2_INCLUDE_DIR})
-target_link_libraries(particle ${SDL2_LIBRARY})
+target_link_libraries(swarm ${SDL2_LIBRARY})
