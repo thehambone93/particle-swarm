@@ -18,6 +18,8 @@ endif()
 
 set(SOURCES
     src/main.cpp
+    src/Screen.h
+    src/Screen.cpp
 )
 
 add_executable(swarm ${SOURCES})
