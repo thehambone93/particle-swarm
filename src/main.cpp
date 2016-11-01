@@ -1,19 +1,28 @@
 #include <iostream>
 
-#include <SDL.h>
+#include "Screen.h"
 
 int main(int argc, char* argv[])
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		std::cout << "SDL initialization failed!" << std::endl;
-	}
-    else 
+    swarm::Screen screen;
+    if (!screen.init())
     {
-        std::cout << "SDL initialized successfully!" << std::endl;
+        std::cerr << "Failed to create screen!" << std::endl;
+        screen.close();
+        return 1;
     }
     
-    SDL_Quit();
+    screen.update();
+
+    while (true)
+    {
+        if (!screen.processEvents())
+        {
+            break;
+        }
+    }
+
+    screen.close();
     
     return 0;
 }
