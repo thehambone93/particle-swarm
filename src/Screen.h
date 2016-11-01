@@ -16,8 +16,8 @@ private:
     SDL_Window *m_window;
     SDL_Renderer *m_renderer;
     SDL_Texture *m_texture;
-    Uint32 *m_buffer1;
-    Uint32 *m_buffer2;
+    Uint32 *m_bufferPrimary;
+    Uint32 *m_bufferSecondary;  /* Need two buffers for box blur algorithm */
 
 public:
     Screen();
@@ -26,7 +26,7 @@ public:
     void clear();
     void close();
     bool processEvents();
-    bool setPixel(unsigned int x, unsigned int y, Uint8 r, Uint8 g, Uint8 b);
+    void setPixel(unsigned int x, unsigned int y, Uint8 r, Uint8 g, Uint8 b);
     void boxBlur();
 };
 
