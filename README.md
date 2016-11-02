@@ -5,6 +5,7 @@ A mesmerizing particle animation.
 ### Windows
 
     mkdir build
+    cd build
     cmake ..
 Compile the project using either Visual Studio or by running ``make``,
 depending on your configuration.
@@ -14,6 +15,7 @@ Install the[SDL2 Development Framework for Mac OS X](https://www.libsdl.org/down
 then generate the build files using CMake:
 
     mkdir build
+    cd build
     cmake ..
 
 Compile the project by running ``make``.
@@ -23,6 +25,7 @@ Install the ``libsdl2-dev`` library using your favorite package manager, then
 generate the build files using CMake:
 
     mkdir build
+    cd build
     cmake ..
 
 Compile the project by running ``make``.
