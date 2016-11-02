@@ -144,7 +144,7 @@ bool Screen::processEvents()
 
 void Screen::setPixel(unsigned int x, unsigned int y, Uint8 r, Uint8 g, Uint8 b)
 {
-    if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
+    if (x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
     {
         return;
     }
