@@ -35,11 +35,24 @@ int main(int argc, char* argv[])
         screen.close();
         return 1;
     }
-    
-    screen.update();
 
     while (true)
     {
+        unsigned int elapsed = SDL_GetTicks();
+
+        Uint8 r = (1 + sin(elapsed * 0.0001)) * 127;
+        Uint8 g = (1 + sin(elapsed * 0.0004)) * 127;
+        Uint8 b = (1 + sin(elapsed * 0.0003)) * 127;
+
+        for (int y = 0; y < swarm::Screen::SCREEN_HEIGHT; y++)
+        {
+            for (int x = 0; x < swarm::Screen::SCREEN_WIDTH; x++)
+            {
+                screen.setPixel(x, y, r, g, b);
+            }
+        }
+        screen.update();
+
         if (!screen.processEvents())
         {
             break;
