@@ -34,18 +34,24 @@ class Swarm
 {
 public:
     const static int NUM_PARTICLES;
+    const static int PARTICLE_MIN_X;
+    const static int PARTICLE_MAX_X;
+    const static int PARTICLE_MIN_Y;
+    const static int PARTICLE_MAX_Y;
 
 private:
     Particle *m_particles;
-    virtual ~Swarm();
 
 public:
     Swarm();
+    virtual ~Swarm();
 
-    const Particle *const get_particles() const;
+    const Particle *const get_particles();
+    void update();
 
 private:
     void init_particle(Particle *p);
+    void update_particle(Particle *p);
 };
 
 } /* namespace swarm */
