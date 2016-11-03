@@ -23,11 +23,17 @@
 */
 
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
+#include "Particle.h"
 #include "Screen.h"
+#include "Swarm.h"
 
 int main(int argc, char* argv[])
 {
+    srand(time(NULL));
+
     swarm::Screen screen;
     if (!screen.init())
     {
@@ -36,21 +42,33 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    swarm::Swarm swarm;
+
+    const int HALF_WIDTH = swarm::Screen::SCREEN_WIDTH / 2;
+    const int HALF_HEIGHT = swarm::Screen::SCREEN_HEIGHT / 2;
+
     while (true)
     {
         unsigned int elapsed = SDL_GetTicks();
+
+        swarm.update();
 
         Uint8 r = (1 + sin(elapsed * 0.0001)) * 127;
         Uint8 g = (1 + sin(elapsed * 0.0004)) * 127;
         Uint8 b = (1 + sin(elapsed * 0.0003)) * 127;
 
-        for (int y = 0; y < swarm::Screen::SCREEN_HEIGHT; y++)
+        const swarm::Particle *const particles = swarm.get_particles();
+        for (int i = 0; i < swarm::Swarm::NUM_PARTICLES; i++)
         {
-            for (int x = 0; x < swarm::Screen::SCREEN_WIDTH; x++)
-            {
-                screen.setPixel(x, y, r, g, b);
-            }
+            swarm::Particle particle = particles[i];
+
+            // Convert cartesian (x,y) to screen (x,y) without stretching
+            int x = (particle.m_x + 1) * HALF_WIDTH;
+            int y = (particle.m_y * HALF_WIDTH) + HALF_HEIGHT;
+
+            screen.setPixel(x, y, r, g, b);
         }
+
         screen.update();
 
         if (!screen.processEvents())
