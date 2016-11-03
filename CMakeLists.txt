@@ -18,8 +18,11 @@ endif()
 
 set(SOURCES
     src/main.cpp
+    src/Particle.h
     src/Screen.h
     src/Screen.cpp
+    src/Swarm.h
+    src/Swarm.cpp
 )
 
 add_executable(swarm ${SOURCES})
