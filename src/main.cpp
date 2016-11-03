@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 
 #include "Particle.h"
