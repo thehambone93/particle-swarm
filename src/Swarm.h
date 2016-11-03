@@ -37,6 +37,7 @@ public:
 
 private:
     Particle *m_particles;
+    virtual ~Swarm();
 
 public:
     Swarm();
