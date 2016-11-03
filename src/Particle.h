@@ -22,20 +22,20 @@
 * SOFTWARE.
 */
 
-#ifndef PARTICLE_H
-#define PARTICLE_H
+#ifndef SWARM_PARTICLE_H
+#define SWARM_PARTICLE_H
 
 namespace swarm
 {
 
-    struct Particle
-    {
-        double m_x;
-        double m_y;
-        double m_speed;
-        double m_direction;
+struct Particle
+{
+    double m_x;
+    double m_y;
+    double m_speed;
+    double m_direction;
 };
 
 } /* namespace swarm */
 
-#endif PARTICLE_H
+#endif /* SWARM_PARTICLE_H */
