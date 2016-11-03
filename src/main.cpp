@@ -70,6 +70,7 @@ int main(int argc, char* argv[])
         }
 
         screen.update();
+        screen.boxBlur();
 
         if (!screen.processEvents())
         {
