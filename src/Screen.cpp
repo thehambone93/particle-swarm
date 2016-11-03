@@ -153,5 +153,49 @@ void Screen::setPixel(unsigned int x, unsigned int y, Uint8 r, Uint8 g, Uint8 b)
     m_bufferPrimary[(y * SCREEN_WIDTH) + x] = color;
 }
 
+void Screen::boxBlur()
+{
+    // Swap buffers
+    // One used for computing blur for each pixel, other used for storing resulting pixel
+    Uint32 *tmp = m_bufferPrimary;
+    m_bufferPrimary = m_bufferSecondary;
+    m_bufferSecondary = tmp;
+
+    // TODO: optimize!!
+    for (int y = 0; y < SCREEN_HEIGHT; y++)
+    {
+        for (int x = 0; x < SCREEN_WIDTH; x++)
+        {
+            int rTotal = 0;
+            int gTotal = 0;
+            int bTotal = 0;
+
+            for (int row = -1; row <= 1; row++)
+            {
+                for (int col = -1; col <= 1; col++)
+                {
+                    int currentX = x + col;
+                    int currentY = y + row;
+
+                    if (currentX >= 0 && currentY < SCREEN_WIDTH &&
+                        currentY >= 0 && currentY < SCREEN_HEIGHT)
+                    {
+                        Uint32 color = m_bufferSecondary[(currentY * SCREEN_WIDTH) + currentX];
+
+                        rTotal += (color & 0xFF000000) >> 24;
+                        gTotal += (color & 0x00FF0000) >> 16;
+                        bTotal += (color & 0x0000FF00) >> 8;
+                    }
+                }
+            }
+
+            Uint8 r = rTotal / 9;
+            Uint8 g = gTotal / 9;
+            Uint8 b = bTotal / 9;
+
+            setPixel(x, y, r, g, b);
+        }
+    }
+}
 
 } /* namespace swarm */
